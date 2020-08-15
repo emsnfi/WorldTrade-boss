@@ -1,31 +1,25 @@
-<template>
+<template >
   <div class="all">
-    <template v-if="step==1">
-      <h2>基本資料</h2>
-      <div>姓名
-      <input type="text" placeholder="填寫姓名"  v-model="name">
-      <div>{{name}}</div>
-
-      <select v-model="name">
-							<option value="all">全部</option>
-							<option :value="name">run</option>
-			</select>
-    </div>
-    </template>
-
-    <template v-if="step==2">
-        <h2>商品</h2>
-        <product></product>
-       
-    </template>
-
-    <template v-else-if="step==3">
-        <h2>金額</h2>
-        <payment-input></payment-input>
-    </template>
-
-    <button  @click="next">下一步</button>
+     <!---可以變成{{}}-->
+    
     <button @click="previous">上一步</button>
+    <button  @click="next">下一步</button>
+    <template v-if="step==1" :title="'基本資料'">
+      <custom-info :title="'基本資料'"></custom-info>
+    </template>
+
+    <template v-if="step==2"  >
+        
+        <product :title="'商品區'"></product>
+       <!--@childByValue="childByValue"-->
+    </template>
+
+    <template v-else-if="step==3" >
+       
+        <payment-input :title="'價錢'"></payment-input>
+    </template>
+
+   
     <p>{{step}}</p>
     
     <!--<div>
@@ -46,37 +40,57 @@
  
   
   import Hello from '@/components/HelloWorld'
+  import CustomInfo from '@/components/customInfo.vue'
   import Product from '@/components/Product.vue'
   import PaymentInput from '@/components/PaymentInput.vue'
+  
 export default {
     name: 'test',
+    props:{
+     title: {
+			type: String,
+			default: '基本資訊',
+		}
+    },
     data() {
       return {
+        //page:"基本資料",
         step: 1,
-        name:"dsad"
+        pp:"商品區",
+        name:"",
+        titletop:""
       }
     },
     components:{
         PaymentInput,
-        Product
+        Product,
+        CustomInfo
     },
     methods:{
         next(){
             this.step++;
-             
-        },
+            //this.$http.get('static/product.json').then(res => {
+ //console.log("json資料為:" + res.body)//此處的res物件包含了json的檔案資訊和資料，我們需要的json資料存在於body屬性中
+//})
+            //this.$emit('title',this.title)
+              
+          },
+       
         previous(){
           this.step--;
-        }
-         
-        
-    },
-   
+        },
+        //childByValue(childValue){
+          //this.titletop=childValue
+        //}
     }
+
+    }
+   
+    
   
 </script>
 
-<style >
+<style scoped lang="scss">
  button:hover{
 
          background-color: azure;

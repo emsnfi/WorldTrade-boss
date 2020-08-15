@@ -11,8 +11,11 @@ var router = new Router({
   routes: [
     {
       path: '/',
-      name: 'HelloWorld',
-      component: HelloWorld
+      name: 'login',
+      component: test,
+      meta: {
+        label: '首頁',
+      }
     },
     {
       path: '/login',

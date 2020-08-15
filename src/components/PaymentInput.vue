@@ -1,5 +1,7 @@
 <template>
-    <div>金額
+<div>
+ <h2>{{title}}</h2>
+    
       <input type="number" placeholder="填寫金額">
       
     </div>
@@ -8,6 +10,11 @@
 <script>
 export default {
     name:'PaymentInput',
-    
+    props:{
+         title: {
+			type: String,
+			default: '',
+    }
+    }
 }
 </script>
