@@ -1,6 +1,8 @@
 <template>
     
-<div>
+<div class="container">
+
+     
 <h2>{{title}}</h2>
 <div>姓名
       <input type="text" placeholder="填寫姓名"  v-model="name">

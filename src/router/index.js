@@ -3,33 +3,52 @@ import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
 // import VueRouter from 'vue-router'
 //import trackService from '@/js/trackservice.js'
-import test from '@/components/test'
-
+import layout from '@/components/layout'
+import home from '@/components/home.vue'
+import product from '@/components/product.vue'
+import login from '@/components/customInfo'
 Vue.use(Router)
 // Vue.use(VueRouter)
 var router = new Router({
+  //mode:"history",
   routes: [
     {
       path: '/',
-      name: 'login',
-      component: test,
+      name: 'layout',
       meta: {
         label: '首頁',
-      }
-    },
-    {
-      path: '/login',
-      name: 'login',
-      component: test,
-      meta: { trackedTitle: '登入頁' }
+      },
+      component: layout,
+      redirect: '/',
+      children: [
+        {
+          path: '/',
+          name: 'home',
+          meta: {
+            label: '首頁',
+          },
+          component: home,
+        },
+        {
+          path: '/product',
+          name: 'product',
+          meta: {
+            label: '產品',
+          },
+          component: product,
+        },
+        {
+          path: '/login',
+          name: 'login',
+          meta: {
+            label: '產品',
+          },
+          component: login,
+        }
+        ]
     }
   ]
 })
-//router.afterEach(route => {
-  // 時間稍微延遲以避免抓取到前個 window.location.href 位置
-  //setTimeout(() => {
-    //pageUserTrack()
-  //}, 500)
-//})
+
 
 export default router 
